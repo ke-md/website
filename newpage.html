@@ -210,8 +210,30 @@
         #blur-scale-content img { border-radius: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
         #blur-scale-content.animate-in img { animation: blurScaleIn 0.5s ease-out forwards; }
         @keyframes blurScaleIn { from { filter: blur(20px); transform: scale(0.8); opacity: 0; } to { filter: blur(0); transform: scale(1); opacity: 1; } }
-        #blur-scale-caption { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; text-align: center; color: #1f2937; font-weight: 600; opacity: 0; transition: opacity 0.5s ease 0.2s; }
-        #blur-scale-backdrop.active #blur-scale-caption { opacity: 1; }
+        #blur-scale-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: white;
+            padding: 3rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease 0.2s, opacity 0.5s ease 0.2s;
+            opacity: 0;
+        }
+        #blur-scale-backdrop.active #blur-scale-caption {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        #blur-scale-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        #blur-scale-description {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body class="text-gray-800">
