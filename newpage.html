@@ -384,13 +384,28 @@
                     const c = document.getElementById('slice-reveal-content');
                     c.innerHTML = '';
                     c.classList.remove('animate-in');
+                    // Determine direction: left-to-right or right-to-left
+                    let direction = 'ltr';
+                    const activeBackdrop = document.getElementById('slice-reveal-backdrop');
+                    if (activeBackdrop) {
+                        // If last navigation was right arrow, animate left-to-right; if left arrow, right-to-left
+                        if (window.__sliceRevealDirection === 'rtl') direction = 'rtl';
+                    }
                     for (let i = 0; i < 6; i++) {
                         const s = document.createElement('div');
                         s.className = 'slice';
                         s.style.backgroundImage = `url(${d.src})`;
                         s.style.backgroundPosition = `${i * 20}% 50%`;
+                        // Animate from left or right
+                        if (direction === 'rtl') {
+                            s.style.order = 6 - i;
+                        } else {
+                            s.style.order = i;
+                        }
                         c.appendChild(s);
                     }
+                    c.style.display = 'flex';
+                    c.style.flexDirection = direction === 'rtl' ? 'row-reverse' : 'row';
                     void c.offsetWidth;
                     c.classList.add('animate-in');
                     document.getElementById('slice-reveal-title').textContent = d.title;
@@ -412,8 +427,14 @@
                 if (gallery && backdrop) {
                     gallery.addEventListener('click', e => { const item = e.target.closest('.gallery-item'); if(item) { currentIndex = parseInt(item.dataset.index); currentGallery = imageData; openLightbox(backdrop, lightboxRegistry[id].setup); } });
                     backdrop.querySelector(`[id$="-close"]`)?.addEventListener('click', () => closeLightbox(backdrop));
-                    backdrop.querySelector(`[id$="-prev"]`)?.addEventListener('click', () => showImage(currentIndex - 1));
-                    backdrop.querySelector(`[id$="-next"]`)?.addEventListener('click', () => showImage(currentIndex + 1));
+                    backdrop.querySelector(`[id$="-prev"]`)?.addEventListener('click', () => {
+                        window.__sliceRevealDirection = 'rtl';
+                        showImage(currentIndex - 1);
+                    });
+                    backdrop.querySelector(`[id$="-next"]`)?.addEventListener('click', () => {
+                        window.__sliceRevealDirection = 'ltr';
+                        showImage(currentIndex + 1);
+                    });
                 }
             });
 
