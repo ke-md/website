@@ -1,0 +1,313 @@
+/* Basic Styles */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.gallery-section {
+  background-color: #fff;
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 1200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.gallery-section h2 {
+  margin-top: 0;
+  border-bottom: 2px solid #8b4513; /* Earthy brown accent */
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.gallery-demo-area {
+  margin-top: 1.5rem;
+}
+
+/* --- Design 1: Masonry Grid --- */
+.masonry-grid {
+  column-count: 3;
+  column-gap: 1rem;
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+  break-inside: avoid; /* Prevents items from breaking across columns */
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Responsive adjustments for Masonry Grid */
+@media (max-width: 900px) {
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .masonry-grid {
+    column-count: 1;
+  }
+}
+
+/* --- Design 2: Fullscreen Slider --- */
+.open-slider-btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid #8b4513;
+  background-color: #8b4513;
+  color: white;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+}
+.open-slider-btn:hover {
+  background-color: #6a360f;
+  transform: translateY(-2px);
+}
+
+.slider-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+
+.slider-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slider-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-slide {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider-slide img {
+  max-width: 90%;
+  max-height: 85%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.slide-caption {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.slider-nav-btn,
+.slider-close-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-nav-btn.prev {
+  left: 2%;
+}
+
+.slider-nav-btn.next {
+  right: 2%;
+}
+
+.slider-close-btn {
+  top: 2%;
+  right: 2%;
+  transform: none;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+}
+
+/* --- Design 3: Thumbnail Filmstrip --- */
+.filmstrip-gallery {
+  max-width: 800px;
+  margin: auto;
+}
+
+.filmstrip-main-image {
+  width: 100%;
+  height: 500px; /* Fixed height for the main image area */
+  background-color: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filmstrip-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.filmstrip-thumbnails {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f0f0f0;
+}
+
+.filmstrip-thumbnails::-webkit-scrollbar {
+  height: 8px;
+}
+
+.filmstrip-thumbnails::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+  flex-shrink: 0; /* Prevent thumbnails from shrinking */
+}
+
+.thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.thumbnail.active {
+  border-color: #8b4513;
+}
+
+/* --- Design 4: Justified Grid --- */
+.justified-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.justified-grid img {
+  height: 200px; /* Set a fixed height for all images */
+  flex-grow: 1;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* --- Design 5: Interactive Grid --- */
+.interactive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.interactive-grid-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.interactive-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.interactive-grid-item:hover img {
+  transform: scale(1.1);
+}
+
+.grid-item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none; /* Allows clicks to go through to the image if needed */
+}
+
+.interactive-grid-item:hover .grid-item-overlay {
+  opacity: 1;
+}
+
+.grid-item-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  transform: translateY(10px);
+  transition: transform 0.4s ease;
+}
+
+.interactive-grid-item:hover .grid-item-title {
+  transform: translateY(0);
+}
