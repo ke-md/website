@@ -314,9 +314,12 @@
     </div>
     
     <div id="blur-scale-backdrop" class="lightbox-backdrop">
-        <div id="blur-scale-content">
-            <img id="blur-scale-image" src="" alt="Blur Scale View" class="block object-contain max-w-[90vw] max-h-[90vh]">
-            <div id="blur-scale-caption"><h3 id="blur-scale-title"></h3></div>
+        <div id="blur-scale-content" class="relative overflow-hidden rounded-lg">
+            <img id="blur-scale-image" src="" alt="Blur Scale View" class="block object-contain max-w-full max-h-full">
+            <div id="blur-scale-caption" class="text-white">
+                <h3 id="blur-scale-title" class="text-xl font-bold"></h3>
+                <p id="blur-scale-description" class="text-sm opacity-80"></p>
+            </div>
         </div>
         <div id="blur-scale-close" class="lightbox-close"><svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></div>
         <div id="blur-scale-prev" class="lightbox-nav left-4"><svg class="w-8 h-8 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></div>
@@ -411,13 +414,14 @@
                     document.getElementById('slice-reveal-title').textContent = d.title;
                 } },
                 'blur-scale': { setup: () => {
-                    const d = imageData[currentIndex];
-                    const c = document.getElementById('blur-scale-content');
-                    c.classList.remove('animate-in');
-                    document.getElementById('blur-scale-image').src = d.src;
-                    document.getElementById('blur-scale-title').textContent = d.title;
-                    void c.offsetWidth;
-                    c.classList.add('animate-in');
+                const d = imageData[currentIndex];
+                const c = document.getElementById('blur-scale-content');
+                c.classList.remove('animate-in');
+                document.getElementById('blur-scale-image').src = d.src;
+                document.getElementById('blur-scale-title').textContent = d.title;
+                document.getElementById('blur-scale-description').textContent = d.description;
+                void c.offsetWidth;
+                c.classList.add('animate-in');
                 } },
             };
 
