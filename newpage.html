@@ -105,7 +105,7 @@
         #cinematic-content {
             position: relative;
             transform: scale(0.95);
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             max-width: 90vw;
             max-height: 90vh;
         }
@@ -389,32 +389,23 @@
             const lightboxRegistry = {
                 'cinematic': { setup: () => {
                     const d = imageData[currentIndex];
-                    const content = document.getElementById('cinematic-content');
-                    const image = document.getElementById('cinematic-image');
+                    const img = document.getElementById('cinematic-image');
+                    const title = document.getElementById('cinematic-title');
+                    const desc = document.getElementById('cinematic-description');
+                    img.src = '';
+                    title.textContent = '';
+                    desc.textContent = '';
+                    // Reset caption styles for transition
                     const caption = document.getElementById('cinematic-caption');
-
-                    // Fade out the content
-                    content.style.opacity = '0';
-
-                    // After fade-out, update everything and animate in
+                    caption.style.transform = 'translateY(100%)';
+                    caption.style.opacity = '0';
                     setTimeout(() => {
-                        // Update image and text
-                        image.src = d.src;
-                        document.getElementById('cinematic-title').textContent = d.title;
-                        document.getElementById('cinematic-description').textContent = d.description;
-
-                        // Reset transforms for re-animation
-                        content.style.transform = 'scale(0.95)';
-                        caption.style.transform = 'translateY(100%)';
-
-                        // Use a small timeout to allow the browser to apply the reset styles
-                        // before starting the animation.
-                        setTimeout(() => {
-                            content.style.opacity = '1';
-                            content.style.transform = 'scale(1)';
-                            caption.style.transform = 'translateY(0)';
-                        }, 20);
-                    }, 300); // This duration should match the opacity transition in the CSS
+                        img.src = d.src;
+                        title.textContent = d.title;
+                        desc.textContent = d.description;
+                        caption.style.transform = 'translateY(0)';
+                        caption.style.opacity = '1';
+                    }, 10);
                 } },
                 'minimalist': { setup: () => { const d=imageData[currentIndex]; const c=document.getElementById('minimalist-image-container'); const cap=document.getElementById('minimalist-caption'); c.classList.remove('animate-in'); cap.classList.remove('animate-in'); document.getElementById('minimalist-image').src=d.src; document.getElementById('minimalist-title').textContent=d.title; void c.offsetWidth; c.classList.add('animate-in'); cap.classList.add('animate-in'); } },
                 'split': { setup: () => { const d=imageData[currentIndex]; document.getElementById('split-image').src=d.src; document.getElementById('split-title').textContent=d.title; document.getElementById('split-description').textContent=d.description; document.getElementById('split-author').textContent=d.author; document.getElementById('split-location').textContent=d.location; document.getElementById('split-date').textContent=d.date; } },
