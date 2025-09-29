@@ -387,7 +387,20 @@
             const handleKeydown = e => { const activeInteractive = document.querySelector('.interactive-item.active'); if (e.key === 'Escape') { const activeLightbox = document.querySelector('.lightbox-backdrop.active'); if (activeLightbox) activeLightbox.querySelector('[id$="-close"]')?.click(); else if (activeInteractive) activeInteractive.querySelector('.interactive-close')?.click(); } else if (e.key === 'ArrowRight' && !activeInteractive) showImage(currentIndex + 1); else if (e.key === 'ArrowLeft' && !activeInteractive) showImage(currentIndex - 1); };
 
             const lightboxRegistry = {
-                'cinematic': { setup: () => { const d=imageData[currentIndex]; document.getElementById('cinematic-image').src=d.src; document.getElementById('cinematic-title').textContent=d.title; document.getElementById('cinematic-description').textContent=d.description; } },
+                'cinematic': { setup: () => {
+                    const d = imageData[currentIndex];
+                    document.getElementById('cinematic-image').src = d.src;
+                    document.getElementById('cinematic-title').textContent = d.title;
+                    document.getElementById('cinematic-description').textContent = d.description;
+                    // Reset caption styles for transition
+                    const caption = document.getElementById('cinematic-caption');
+                    caption.style.transform = 'translateY(100%)';
+                    caption.style.opacity = '0';
+                    setTimeout(() => {
+                        caption.style.transform = 'translateY(0)';
+                        caption.style.opacity = '1';
+                    }, 10);
+                } },
                 'minimalist': { setup: () => { const d=imageData[currentIndex]; const c=document.getElementById('minimalist-image-container'); const cap=document.getElementById('minimalist-caption'); c.classList.remove('animate-in'); cap.classList.remove('animate-in'); document.getElementById('minimalist-image').src=d.src; document.getElementById('minimalist-title').textContent=d.title; void c.offsetWidth; c.classList.add('animate-in'); cap.classList.add('animate-in'); } },
                 'split': { setup: () => { const d=imageData[currentIndex]; document.getElementById('split-image').src=d.src; document.getElementById('split-title').textContent=d.title; document.getElementById('split-description').textContent=d.description; document.getElementById('split-author').textContent=d.author; document.getElementById('split-location').textContent=d.location; document.getElementById('split-date').textContent=d.date; } },
                 'immersive': { setup: () => { const d=imageData[currentIndex]; document.getElementById('immersive-image').src=d.src; document.getElementById('immersive-title').textContent=d.title; } },
@@ -435,14 +448,22 @@
                     document.getElementById('slice-reveal-title').textContent = d.title;
                 } },
                 'blur-scale': { setup: () => {
-                const d = imageData[currentIndex];
-                const c = document.getElementById('blur-scale-content');
-                c.classList.remove('animate-in');
-                document.getElementById('blur-scale-image').src = d.src;
-                document.getElementById('blur-scale-title').textContent = d.title;
-                document.getElementById('blur-scale-description').textContent = d.description;
-                void c.offsetWidth;
-                c.classList.add('animate-in');
+                    const d = imageData[currentIndex];
+                    const c = document.getElementById('blur-scale-content');
+                    c.classList.remove('animate-in');
+                    document.getElementById('blur-scale-image').src = d.src;
+                    document.getElementById('blur-scale-title').textContent = d.title;
+                    document.getElementById('blur-scale-description').textContent = d.description;
+                    // Reset caption styles for transition
+                    const caption = document.getElementById('blur-scale-caption');
+                    caption.style.transform = 'translateY(100%)';
+                    caption.style.opacity = '0';
+                    void c.offsetWidth;
+                    c.classList.add('animate-in');
+                    setTimeout(() => {
+                        caption.style.transform = 'translateY(0)';
+                        caption.style.opacity = '1';
+                    }, 10);
                 } },
             };
 
