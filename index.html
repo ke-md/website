@@ -1,12 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta tags for character set and viewport -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Page Title -->
   <title>Kumaon Elements — Metta Dhura</title>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Internal CSS Styles -->
   <style>
+    /* CSS variables for colors */
     :root{
       --bg:#F9F9F7;           /* soft, off‑white */
       --text:#333333;         /* deep charcoal */
@@ -39,6 +43,23 @@
     .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
     .reveal.in{opacity:1; transform:none}
 
+      /* --- Navigation Button --- */
+      .nav-btn {
+        display: inline-block;
+        padding: 0.7em 1.6em;
+        font-size: 1.1rem;
+        font-family: 'Lato', system-ui, sans-serif;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin: 2rem 0;
+      }
+      .nav-btn:hover {
+        background: #A0522D;
+      }
     /* --- Fixed Header --- */
     .nav{position:sticky; top:0; z-index:50; background:rgba(249,249,247,.92); backdrop-filter:saturate(140%) blur(6px); border-bottom:1px solid var(--line)}
     .nav .container{display:flex; align-items:center; justify-content:space-between; padding:1rem 0}
@@ -125,7 +146,7 @@
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section id="home" class="hero spacious reveal">
     <div class="hero-bg" aria-hidden="true">
       <img src="https://kumaonelements.com/wp-content/uploads/2023/04/Banner-1-1024x576.jpg" alt="" loading="eager" />
@@ -143,7 +164,7 @@
 
   <div class="divider"></div>
 
-  <!-- MettāDhura -->
+  <!-- MettāDhura Section -->
   <section id="mettadhura" class="container spacious reveal feature split">
     <div class="copy">
       <div class="eyebrow">MettāDhura</div>
@@ -174,7 +195,12 @@
     </div>
   </section>
 
-  <!-- Cuisine -->
+  <!-- Navigation Button to New Page -->
+  <div class="container" style="text-align: center;">
+    <button class="nav-btn" onclick="window.open('newpage.html', '_blank')">Open New Page</button>
+  </div>
+
+  <!-- Cuisine Section -->
   <section id="cuisine" class="container spacious reveal feature split" style="direction:rtl">
     <div class="media" style="direction:ltr">
       <img src="https://kumaonelements.com/wp-content/uploads/2023/02/photo-1578884144755-6f1907e23058-1.jpeg" alt="Bon Appétit dining" loading="lazy" />
@@ -186,7 +212,7 @@
     </div>
   </section>
 
-  <!-- Experiences (horizontal gallery) -->
+  <!-- Experiences Section (horizontal gallery) -->
   <section id="experiences" class="container spacious reveal">
     <div class="eyebrow">Experiences</div>
     <h2 class="section-title">Experience With Us</h2>
@@ -243,21 +269,21 @@
     </div>
   </section>
 
-  <!-- Explore (minimal anchor section to preserve sitemap) -->
+  <!-- Explore Section -->
   <section id="explore" class="container spacious reveal">
     <div class="eyebrow">Explore Kumaon</div>
     <h2 class="section-title">Curated Trips & Conveniences</h2>
     <p class="muted">Pick Up & Drop • Traditional Kumaoni Cuisine • Curated Trips • Meditation • Parking Space • Kitchenette • Trekking & Hiking</p>
   </section>
 
-  <!-- About -->
+  <!-- About Section -->
   <section id="about" class="container spacious reveal">
     <div class="eyebrow">Since 2019</div>
     <h2 class="section-title">Kumaon Elements</h2>
     <p class="muted">An offbeat Himalayan destination in Almora, 380 kms from Delhi. Set close to verdant forests and offering amazing views of the Himalayas.</p>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Testimonials Section -->
   <section class="container spacious reveal" aria-label="Testimonials">
     <div class="eyebrow">Testimonials</div>
     <h2 class="section-title">Guest Stories</h2>
@@ -285,7 +311,7 @@
     </div>
   </section>
 
-  <!-- Contact & Footer -->
+  <!-- Contact & Footer Section -->
   <footer id="contact" class="reveal">
     <div class="container footer-grid">
       <!-- Column 1: Contact -->
@@ -336,20 +362,22 @@
     <div class="container copyright">© 2023 Kumaon Elements. All rights reserved.</div>
   </footer>
 
+  <!-- JavaScript for page animations and functionality -->
   <script>
-    // IntersectionObserver for reveal-on-scroll
+    // IntersectionObserver for reveal-on-scroll animation
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in')}})
     }, {threshold:.12});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // Simple testimonials slider
+    // Simple testimonials slider functionality
     const slides = Array.from(document.querySelectorAll('.slide'));
     const dots = Array.from(document.querySelectorAll('.dots button'));
     let i = 0; setInterval(()=>{slides[i].classList.remove('active'); dots[i].classList.remove('active'); i = (i+1)%slides.length; slides[i].classList.add('active'); dots[i].classList.add('active');}, 5500);
   </script>
+  <!-- JavaScript for fetching live weather data -->
   <script>
-    // Live Weather via Open‑Meteo (no API key required)
+    // Live Weather via Open‑Meteo API (no API key required)
     (async function(){
       const lat = 29.62, lon = 79.67; // Almora district, Uttarakhand
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,is_day,cloud_cover&hourly=cloud_cover&daily=sunrise,sunset&timezone=auto`;
