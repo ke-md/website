@@ -366,9 +366,44 @@
                 'minimalist': { setup: () => { const d=imageData[currentIndex]; const c=document.getElementById('minimalist-image-container'); const cap=document.getElementById('minimalist-caption'); c.classList.remove('animate-in'); cap.classList.remove('animate-in'); document.getElementById('minimalist-image').src=d.src; document.getElementById('minimalist-title').textContent=d.title; void c.offsetWidth; c.classList.add('animate-in'); cap.classList.add('animate-in'); } },
                 'split': { setup: () => { const d=imageData[currentIndex]; document.getElementById('split-image').src=d.src; document.getElementById('split-title').textContent=d.title; document.getElementById('split-description').textContent=d.description; document.getElementById('split-author').textContent=d.author; document.getElementById('split-location').textContent=d.location; document.getElementById('split-date').textContent=d.date; } },
                 'immersive': { setup: () => { const d=imageData[currentIndex]; document.getElementById('immersive-image').src=d.src; document.getElementById('immersive-title').textContent=d.title; } },
-                'card-flip': { setup: () => { const d=imageData[currentIndex]; const c=document.getElementById('card-flip-content'); const img=document.getElementById('card-flip-image'); const isOpening=!document.getElementById('card-flip-backdrop').classList.contains('active'); if(isOpening){ c.classList.remove('animate-in'); void c.offsetWidth; c.classList.add('animate-in'); } else { img.style.opacity=0; setTimeout(() => {img.src=d.src; img.style.opacity=1;}, 300); } document.getElementById('card-flip-title').textContent=d.title; } },
-                'slice-reveal': { setup: () => { const d=imageData[currentIndex]; const c=document.getElementById('slice-reveal-content'); c.innerHTML = ''; c.classList.remove('animate-in'); for (let i=0; i<6; i++) { const s=document.createElement('div'); s.className='slice'; s.style.backgroundImage=`url(${d.src})`; s.style.backgroundPosition=`${i*20}% 50%`; c.appendChild(s); } void c.offsetWidth; c.classList.add('animate-in'); document.getElementById('slice-reveal-title').textContent=d.title; } },
-                'blur-scale': { setup: () => { const d=imageData[currentIndex]; const c=document.getElementById('blur-scale-content'); c.classList.remove('animate-in'); document.getElementById('blur-scale-image').src=d.src; document.getElementById('blur-scale-title').textContent=d.title; void c.offsetWidth; c.classList.add('animate-in'); } },
+                'card-flip': { setup: () => {
+                    const d = imageData[currentIndex];
+                    const c = document.getElementById('card-flip-content');
+                    const img = document.getElementById('card-flip-image');
+                    c.classList.remove('animate-in');
+                    img.style.opacity = 0;
+                    setTimeout(() => {
+                        img.src = d.src;
+                        img.style.opacity = 1;
+                        c.classList.add('animate-in');
+                    }, 100);
+                    document.getElementById('card-flip-title').textContent = d.title;
+                } },
+                'slice-reveal': { setup: () => {
+                    const d = imageData[currentIndex];
+                    const c = document.getElementById('slice-reveal-content');
+                    c.innerHTML = '';
+                    c.classList.remove('animate-in');
+                    for (let i = 0; i < 6; i++) {
+                        const s = document.createElement('div');
+                        s.className = 'slice';
+                        s.style.backgroundImage = `url(${d.src})`;
+                        s.style.backgroundPosition = `${i * 20}% 50%`;
+                        c.appendChild(s);
+                    }
+                    void c.offsetWidth;
+                    c.classList.add('animate-in');
+                    document.getElementById('slice-reveal-title').textContent = d.title;
+                } },
+                'blur-scale': { setup: () => {
+                    const d = imageData[currentIndex];
+                    const c = document.getElementById('blur-scale-content');
+                    c.classList.remove('animate-in');
+                    document.getElementById('blur-scale-image').src = d.src;
+                    document.getElementById('blur-scale-title').textContent = d.title;
+                    void c.offsetWidth;
+                    c.classList.add('animate-in');
+                } },
             };
 
             Object.keys(lightboxRegistry).forEach(id => {
@@ -384,20 +419,39 @@
 
             document.getElementById('immersive-backdrop')?.addEventListener('click', e => { if (!e.target.closest('#immersive-ui')) e.currentTarget.classList.toggle('touch-active'); });
 
-            const gridItems = document.querySelectorAll('.interactive-item');
-            const closeActiveInteractiveItem = () => { const activeItem = document.querySelector('.interactive-item.active'); if (activeItem) { activeItem.classList.remove('active'); interactiveGridContainer.classList.remove('active'); document.body.style.overflow = ''; window.removeEventListener('keydown', handleKeydown); } };
-            gridItems.forEach(item => {
-                item.addEventListener('click', e => {
-                    if (e.target.closest('.interactive-close') || item.classList.contains('active')) return;
-                    if (document.querySelector('.lightbox-backdrop.active') || document.querySelector('.interactive-item.active')) return;
+                // Event delegation for interactive grid
+                interactiveGridContainer.addEventListener('click', function(e) {
+                    const item = e.target.closest('.interactive-item');
+                    if (!item) return;
+
+                    // If close button is clicked
+                    if (e.target.closest('.interactive-close')) {
+                        item.classList.remove('active');
+                        interactiveGridContainer.classList.remove('active');
+                        document.body.style.overflow = '';
+                        window.removeEventListener('keydown', escListener);
+                        return;
+                    }
+
+                    // If another item is already active, ignore
+                    if (document.querySelector('.interactive-item.active')) return;
+
+                    // Activate clicked item
                     item.classList.add('active');
                     interactiveGridContainer.classList.add('active');
                     document.body.style.overflow = 'hidden';
-                    window.addEventListener('keydown', handleKeydown);
-                    const closeBtn = item.querySelector('.interactive-close');
-                    closeBtn?.addEventListener('click', e => { e.stopPropagation(); closeActiveInteractiveItem(); }, { once: true });
+
+                    // Keyboard ESC closes active item
+                    function escListener(ev) {
+                        if (ev.key === 'Escape') {
+                            item.classList.remove('active');
+                            interactiveGridContainer.classList.remove('active');
+                            document.body.style.overflow = '';
+                            window.removeEventListener('keydown', escListener);
+                        }
+                    }
+                    window.addEventListener('keydown', escListener, { once: true });
                 });
-            });
         });
     </script>
 </body>
