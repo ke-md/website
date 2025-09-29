@@ -390,13 +390,15 @@
                 'cinematic': { setup: () => {
                     const d = imageData[currentIndex];
                     document.getElementById('cinematic-image').src = d.src;
-                    document.getElementById('cinematic-title').textContent = d.title;
-                    document.getElementById('cinematic-description').textContent = d.description;
+                    document.getElementById('cinematic-title').textContent = '';
+                    document.getElementById('cinematic-description').textContent = '';
                     // Reset caption styles for transition
                     const caption = document.getElementById('cinematic-caption');
                     caption.style.transform = 'translateY(100%)';
                     caption.style.opacity = '0';
                     setTimeout(() => {
+                        document.getElementById('cinematic-title').textContent = d.title;
+                        document.getElementById('cinematic-description').textContent = d.description;
                         caption.style.transform = 'translateY(0)';
                         caption.style.opacity = '1';
                     }, 10);
