@@ -47,57 +47,182 @@
         /**
          * Close button styling - consistent across all lightboxes
          * Positioned in top-right corner with hover effects
+         * Responsive sizing for mobile devices
          */
         .lightbox-close {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            z-index: 60; /* Ensure it's above all content */
-        }
-
-        .lightbox-close:hover {
-            background-color: rgba(0, 0, 0, 0.6);
-            transform: scale(1.1);
-        }
-
-        /**
-         * Navigation arrow styling - consistent across all lightboxes
-         * Positioned on left/right sides with hover effects
-         */
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 1rem;
+            right: 1rem;
             width: 3rem;
             height: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.7);
             border-radius: 9999px;
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.2s ease;
-            z-index: 60; /* Ensure it's above all content */
+            z-index: 60;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-close:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /**
+         * Navigation arrow styling - consistent across all lightboxes
+         * Positioned on left/right sides with hover effects
+         * Enhanced for mobile touch interaction
+         */
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3.5rem;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+            z-index: 60;
+            opacity: 1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .lightbox-nav:hover {
-            background-color: rgba(0, 0, 0, 0.6);
-            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox-nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        /* Mobile responsive improvements - Enhanced touch targets */
+        @media (max-width: 768px) {
+            .lightbox-close {
+                top: 0.75rem;
+                right: 0.75rem;
+                width: 3.5rem;
+                height: 3.5rem;
+                background-color: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .lightbox-close:hover {
+                background-color: rgba(0, 0, 0, 0.95);
+                border-color: rgba(255, 255, 255, 0.4);
+            }
+
+            .lightbox-nav {
+                width: 4rem;
+                height: 4rem;
+                background-color: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(4px);
+                opacity: 1;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .lightbox-nav:hover {
+                background-color: rgba(0, 0, 0, 0.95);
+                transform: translateY(-50%) scale(1.05);
+                border-color: rgba(255, 255, 255, 0.4);
+            }
+
+            .lightbox-nav svg {
+                width: 2rem;
+                height: 2rem;
+            }
+
+            .lightbox-close svg {
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+
+            /* Touch-friendly spacing for navigation */
+            .lightbox-nav.left-4 {
+                left: 1rem;
+            }
+
+            .lightbox-nav.right-4 {
+                right: 1rem;
+            }
+
+            .lightbox-nav.left-8 {
+                left: 1rem;
+            }
+
+            .lightbox-nav.right-8 {
+                right: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lightbox-close {
+                top: 0.5rem;
+                right: 0.5rem;
+                width: 4rem;
+                height: 4rem;
+                background-color: rgba(0, 0, 0, 0.85);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+
+            .lightbox-close:hover {
+                background-color: rgba(0, 0, 0, 0.98);
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .lightbox-nav {
+                width: 4.5rem;
+                height: 4.5rem;
+                background-color: rgba(0, 0, 0, 0.85);
+                opacity: 1;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+
+            .lightbox-nav:hover {
+                background-color: rgba(0, 0, 0, 0.98);
+                transform: translateY(-50%) scale(1.03);
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .lightbox-nav.left-4 {
+                left: 0.5rem;
+            }
+
+            .lightbox-nav.right-4 {
+                right: 0.5rem;
+            }
+
+            .lightbox-nav.left-8 {
+                left: 0.5rem;
+            }
+
+            .lightbox-nav.right-8 {
+                right: 0.5rem;
+            }
         }
 
         /**
          * Gallery thumbnail hover effects
          * Provides visual feedback on hover with subtle scale and shadow
+         * Enhanced for touch devices with minimum touch target size
          */
+        .gallery-item {
+            position: relative;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
         .gallery-item img {
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
             cursor: pointer;
@@ -106,6 +231,13 @@
         .gallery-item:hover img {
             transform: scale(1.05);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .gallery-item:active img {
+                transform: scale(0.98);
+                transition: transform 0.1s ease-out;
+            }
         }
 
         /**
@@ -139,6 +271,9 @@
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             max-width: 90vw;
             max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #cinematic-backdrop.active #cinematic-content {
@@ -172,6 +307,10 @@
         }
         #minimalist-image-container {
              box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             position: relative;
         }
         #minimalist-image-container.animate-in-right {
             animation: slideInFromRight 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
@@ -207,11 +346,216 @@
         #split-content.portrait-image .split-image-panel { flex: 2; }
         #split-content.portrait-image .split-info-panel { flex: 3; }
 
-        /* Mobile responsive */
+        /* Mobile responsive improvements for all galleries */
         @media (max-width: 768px) {
-            #split-content { flex-direction: column !important; width: 95vw; height: 95vh; }
-            #split-content .split-image-panel, #split-content .split-info-panel { flex: 1 !important; }
-            .split-info-panel { padding: 1.5rem; }
+            /* Split Screen Panel mobile optimization */
+            #split-content {
+                flex-direction: column !important;
+                width: 95vw;
+                height: 95vh;
+                max-height: calc(100vh - 2rem);
+            }
+            #split-content .split-image-panel,
+            #split-content .split-info-panel {
+                flex: 1 !important;
+            }
+            .split-info-panel {
+                padding: 1.5rem;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Horizontal Split & Zoom mobile optimization */
+            #horizontal-split-content {
+                width: 95vw;
+                height: 85vh;
+                max-height: calc(100vh - 4rem);
+            }
+
+            /* Carousel Wheel mobile optimization */
+            #carousel-wheel-content {
+                width: 95vw;
+                height: 85vh;
+                max-height: calc(100vh - 4rem);
+            }
+
+            #carousel-wheel-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .carousel-wheel-item {
+                width: 150px;
+                height: 150px;
+            }
+
+            .carousel-wheel-item:nth-child(1) {
+                transform: translate(-50%, -50%) rotateY(0deg) translateZ(150px);
+            }
+            .carousel-wheel-item:nth-child(2) {
+                transform: translate(-50%, -50%) rotateY(45deg) translateZ(150px);
+            }
+            .carousel-wheel-item:nth-child(3) {
+                transform: translate(-50%, -50%) rotateY(90deg) translateZ(150px);
+            }
+            .carousel-wheel-item:nth-child(4) {
+                transform: translate(-50%, -50%) rotateY(135deg) translateZ(150px);
+            }
+            .carousel-wheel-item:nth-child(5) {
+                transform: translate(-50%, -50%) rotateY(180deg) translateZ(150px);
+            }
+            .carousel-wheel-item:nth-child(6) {
+                transform: translate(-50%, -50%) rotateY(225deg) translateZ(150px);
+            }
+            .carousel-wheel-item:nth-child(7) {
+                transform: translate(-50%, -50%) rotateY(270deg) translateZ(150px);
+            }
+            .carousel-wheel-item:nth-child(8) {
+                transform: translate(-50%, -50%) rotateY(315deg) translateZ(150px);
+            }
+
+            #carousel-wheel-main-image {
+                max-width: 85vw;
+                max-height: 60vh;
+            }
+
+            /* Image sizing for mobile - Enhanced viewport handling */
+            #cinematic-content,
+            #minimalist-image-container,
+            #card-flip-content,
+            #zoom-ripple-content,
+            #blur-scale-content {
+                max-width: 95vw;
+                max-height: 85vh;
+                max-height: calc(100vh - 6rem);
+            }
+
+            #cinematic-content img,
+            #minimalist-image,
+            #card-flip-image,
+            #zoom-ripple-image,
+            #blur-scale-image {
+                max-width: 95vw;
+                max-height: 75vh;
+                max-height: calc(100vh - 8rem);
+                object-fit: contain;
+            }
+
+            #immersive-content {
+                width: 100%;
+                height: 100%;
+            }
+
+            #immersive-image {
+                max-width: 95vw;
+                max-height: 90vh;
+                max-height: calc(100vh - 2rem);
+            }
+
+            /* Prevent viewport overflow */
+            .lightbox-backdrop {
+                padding: 1rem;
+                box-sizing: border-box;
+            }
+
+            /* Gallery section responsive spacing */
+            main {
+                padding: 2rem 1rem;
+            }
+
+            section {
+                margin-bottom: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small mobile optimization */
+            .split-info-panel {
+                padding: 1rem;
+            }
+
+            #carousel-wheel-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .carousel-wheel-item {
+                width: 120px;
+                height: 120px;
+            }
+
+            .carousel-wheel-item:nth-child(1) {
+                transform: translate(-50%, -50%) rotateY(0deg) translateZ(125px);
+            }
+            .carousel-wheel-item:nth-child(2) {
+                transform: translate(-50%, -50%) rotateY(45deg) translateZ(125px);
+            }
+            .carousel-wheel-item:nth-child(3) {
+                transform: translate(-50%, -50%) rotateY(90deg) translateZ(125px);
+            }
+            .carousel-wheel-item:nth-child(4) {
+                transform: translate(-50%, -50%) rotateY(135deg) translateZ(125px);
+            }
+            .carousel-wheel-item:nth-child(5) {
+                transform: translate(-50%, -50%) rotateY(180deg) translateZ(125px);
+            }
+            .carousel-wheel-item:nth-child(6) {
+                transform: translate(-50%, -50%) rotateY(225deg) translateZ(125px);
+            }
+            .carousel-wheel-item:nth-child(7) {
+                transform: translate(-50%, -50%) rotateY(270deg) translateZ(125px);
+            }
+            .carousel-wheel-item:nth-child(8) {
+                transform: translate(-50%, -50%) rotateY(315deg) translateZ(125px);
+            }
+
+            #carousel-wheel-main-image {
+                max-width: 90vw;
+                max-height: 55vh;
+            }
+
+            /* Enhanced mobile layout */
+            main {
+                padding: 1rem 0.75rem;
+            }
+
+            section {
+                margin-bottom: 2rem;
+            }
+
+            .lightbox-backdrop {
+                padding: 0.5rem;
+            }
+
+            /* Extra spacing for safer touch areas */
+            #cinematic-content,
+            #minimalist-image-container,
+            #card-flip-content,
+            #zoom-ripple-content,
+            #blur-scale-content {
+                max-width: 98vw;
+                max-height: calc(100vh - 4rem);
+            }
+
+            /* Typography adjustments for mobile */
+            #split-title {
+                font-size: 1.75rem;
+            }
+
+            #carousel-wheel-title,
+            #horizontal-split-title {
+                font-size: 1.25rem;
+            }
+
+            #cinematic-title,
+            #zoom-ripple-title,
+            #blur-scale-title {
+                font-size: 1.125rem;
+            }
+
+            h2.text-2xl {
+                font-size: 1.5rem;
+            }
         }
 
         /* --- 5. Full Screen Immersive --- */
@@ -275,6 +619,12 @@
         /* Initial load animation */
         @keyframes cardFlipInLeft { from { transform: rotateY(-180deg) scale(0.7); } to { transform: rotateY(0) scale(1); } }
 
+        #card-flip-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         #card-flip-content img { transition: opacity 0.3s ease; }
         #card-flip-caption { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); color: white; padding: 3rem 1.5rem 1.5rem; transform: translateY(100%); transition: transform 0.4s ease 0.3s; }
         #card-flip-backdrop.active #card-flip-caption { transform: translateY(0); }
@@ -285,6 +635,9 @@
         #zoom-ripple-backdrop {
             background-color: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #zoom-ripple-content {
@@ -292,6 +645,10 @@
             transform: scale(1.75);
             opacity: 0;
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         #zoom-ripple-backdrop.active #zoom-ripple-content {
@@ -304,6 +661,8 @@
             max-height: 85vh;
             border-radius: 0.5rem;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
+            display: block;
         }
 
 
@@ -311,7 +670,7 @@
          * Caption with same styling as Cinematic
          */
         #zoom-ripple-caption {
-            position: static;
+            position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
@@ -583,11 +942,15 @@
 
         #blur-scale-content {
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
         #blur-scale-content img {
             border-radius: 1rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            transition: filter 1.0s ease-out, transform 1.0s ease-out, opacity 1.0s ease-out;
+            transition: filter .75s ease-out, transform .75s ease-out, opacity .75s ease-out;
         }
 
         #blur-scale-content:not(.animate-in) img {
@@ -644,49 +1007,49 @@
         
         <section class="mb-16">
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">1. Cinematic Fade & Zoom</h2><p class="text-gray-500">A dramatic entrance. The background blurs as the image fades in with a subtle zoom. Captions slide up for context.</p></div>
-            <div id="cinematic-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="cinematic-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
 
         <section class="mb-16">
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">2. Minimalist Slide-In</h2><p class="text-gray-500">Clean and elegant. The image smoothly slides in from the side over a blurred background for a modern, app-like feel.</p></div>
-            <div id="minimalist-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="minimalist-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
-        
-        
+
+
         <section class="mb-16">
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">3. Split-Screen Panel</h2><p class="text-gray-500">Perfect for portfolios or product showcases. Displays the image alongside detailed information.</p></div>
-            <div id="split-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="split-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
-        
+
         <section class="mb-16">
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">4. Full-Screen Immersive</h2><p class="text-gray-500">Maximizes focus on the image. The UI fades away, creating an distraction-free, cinematic viewing experience.</p></div>
-            <div id="immersive-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="immersive-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
 
         <section class="mb-16">
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">5. 3D Card Flip</h2><p class="text-gray-500">A playful 3D effect. The image flips over like a card to reveal the lightbox.</p></div>
-            <div id="card-flip-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="card-flip-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
 
 
         <section class="mb-16">
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">6. Zoom Out</h2><p class="text-gray-500">A smooth zoom-out effect where the image starts enlarged and elegantly scales down to its final size.</p></div>
-            <div id="zoom-ripple-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="zoom-ripple-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
 
         <section class="mb-16">
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">8. Horizontal Split & Zoom</h2><p class="text-gray-500">A dramatic split-screen reveal where two halves slide in from opposite sides while the image zooms out from an enlarged state.</p></div>
-            <div id="horizontal-split-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="horizontal-split-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
 
         <section class="mb-16">
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">9. Carousel Wheel</h2><p class="text-gray-500">A mesmerizing 3D carousel wheel that rotates continuously while the main image scales up from the center with dramatic perspective effects.</p></div>
-            <div id="carousel-wheel-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="carousel-wheel-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
 
         <section>
             <div class="mb-6"><h2 class="text-2xl font-semibold mb-1">10. Fading Blur & Scale</h2><p class="text-gray-500">A soft and elegant reveal, where the image fades in from a blurred and scaled-down state.</p></div>
-            <div id="blur-scale-gallery" class="gallery-grid grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div id="blur-scale-gallery" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
         </section>
 
     </main>
