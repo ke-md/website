@@ -389,11 +389,8 @@
                     c.classList.remove('animate-in');
                     // Determine direction: left-to-right or right-to-left
                     let direction = 'ltr';
-                    const activeBackdrop = document.getElementById('slice-reveal-backdrop');
-                    if (activeBackdrop) {
-                        // If last navigation was right arrow, animate left-to-right; if left arrow, right-to-left
-                        if (window.__sliceRevealDirection === 'rtl') direction = 'rtl';
-                    }
+                    if (window.__sliceRevealDirection === 'rtl') direction = 'rtl';
+                    // Animate slices in the direction of navigation
                     for (let i = 0; i < 6; i++) {
                         const s = document.createElement('div');
                         s.className = 'slice';
@@ -402,8 +399,10 @@
                         // Animate from left or right
                         if (direction === 'rtl') {
                             s.style.order = 6 - i;
+                            s.style.animationDirection = 'reverse';
                         } else {
                             s.style.order = i;
+                            s.style.animationDirection = 'normal';
                         }
                         c.appendChild(s);
                     }
